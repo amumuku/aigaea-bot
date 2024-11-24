@@ -1,5 +1,5 @@
 ## AIGEA BOT USING PROXY [https://app.aigaea.net/](https://app.aigaea.net/register?ref=ga5TzsI2Xmfwnr)
-
+##TG communicate channel [TG CHANNEL](https://t.co/2f0y7mCn1K)
 ![banner](image.png)
 
 # Proxy Manager with Aigaea

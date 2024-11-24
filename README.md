@@ -1,4 +1,4 @@
-## AIGEA BOT USING PROXY [https://app.aigaea.net/](https://app.aigaea.net/register?ref=garYCBkzvi5t3J)
+## AIGEA BOT USING PROXY [https://app.aigaea.net/](https://app.aigaea.net/register?ref=ga5TzsI2Xmfwnr)
 
 ![banner](image.png)
 

@@ -3,21 +3,27 @@
   const fs = require('fs').promises;
   const { HttpsProxyAgent } = require('https-proxy-agent');
   const path = require('path'); 
-  const readline = require('readline');
+//   const readline = require('readline');
   const crypto = require('crypto'); 
 
-  const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-  });
+//   const rl = readline.createInterface({
+//       input: process.stdin,
+//       output: process.stdout
+//   });
 
-  function askQuestion(query) {
-      return new Promise((resolve) => rl.question(query, (answer) => resolve(answer)));
-  }
+//   function askQuestion(query) {
+//       return new Promise((resolve) => rl.question(query, (answer) => resolve(answer)));
+//   }
 
   async function main() {
-      const accessToken = await askQuestion("Enter your accessToken :");
-      const id8 = await askQuestion("Enter your first 8 browserID :");
+    //   const accessToken = await askQuestion("Enter your accessToken :");
+    //   const id8 = await askQuestion("Enter your first 8 browserID :");
+          // 文件路径
+      const accessTokenFilePath = path.join(__dirname, 'access_token.txt');
+      const id8FilePath = path.join(__dirname, 'browser_id_prefix.txt');
+     const accessToken = await fs.readFile(accessTokenFilePath, 'utf-8');
+     const id8 = await fs.readFile(id8FilePath, 'utf-8');
+
 
       let headers = {
           'Accept': 'application/json, text/plain, */*',
@@ -102,9 +108,13 @@
               try {
                   const pingResponse = await coday('https://api.aigaea.net/api/network/ping', 'POST', pingPayload, proxy);
                   console.log(`Ping successful for proxy ${proxy}:`, pingResponse);
-
+                 if (!pingResponse) {
+                        console.error(`Ping failed for proxy ${proxy}: Response is undefined or null`);
+                        await new Promise(resolve => setTimeout(resolve, 5000));  
+                        continue;
+                  }
                   // Check the score 
-                  if (pingResponse.data && pingResponse.data.score < 50) {
+                  if (pingResponse&&pingResponse.data && pingResponse.data.score < 50) {
                       console.log(`Score below 50 for proxy ${proxy}, re-authenticating...`);
 
                       // Re-authenticate and restart pinging with a new browser_id
